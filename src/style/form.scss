@@ -27,6 +27,78 @@
         opacity: 1;
     }
 
+    .on-success {
+        padding-top: 2rem;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        z-index: 1001;
+        top: 0;
+        background: rgba(204, 204, 204, 0.11);
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+        transition: all 200ms linear;
+        opacity: 0;
+        visibility: hidden;
+
+        &.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .on-success__inner {
+            padding: 1rem 2rem;
+            height: max-content;
+            background: linear-gradient(
+                127.7deg,
+                rgba(184, 184, 184, 0.1377) 26.85%,
+                rgba(184, 184, 184, 0.0408) 78.2%
+            );
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+                -4px -3px 20px rgba(184, 184, 184, 0.39);
+            transition: all 300ms linear 50ms;
+            transform: translateY(-150%);
+            opacity: 0;
+
+            &.open {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .on-success__message {
+                font-family: Ubuntu;
+                font-weight: 300;
+                font-size: 1.3rem;
+                line-height: 41px;
+                color: #ffffff;
+                text-shadow: 0px 0px 15.2205px rgba(255, 255, 255, 0.55);
+            }
+
+            .on-succes__button {
+                float: right;
+                margin-top: 1rem;
+                cursor: pointer;
+                border: none;
+                width: 110px;
+                height: 35px;
+                background: #11dd0d;
+                box-shadow: -0.596838px -1.79051px 35.37px rgba(17, 221, 13, 0.18),
+                    1.19368px 2.98419px 40.74px rgba(17, 221, 13, 0.2);
+                border-radius: 5.96838px;
+                text-shadow: 0px 0px 14.1972px rgba(255, 255, 255, 0.36);
+                color: rgba(255, 255, 255, 0.76);
+                font-size: 1rem;
+                transition: all 100ms linear;
+
+                &:hover {
+                    background: #1abcfe;
+                }
+            }
+        }
+    }
+
     .form__inner__wrapper {
         font-family: $ubuntu;
         font-weight: 300;

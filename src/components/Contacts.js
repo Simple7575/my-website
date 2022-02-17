@@ -111,6 +111,7 @@ export default function Contacts({ setFormState }) {
                         className="contacts__icon"
                         onClick={() => {
                             setFormState("open");
+                            document.body.classList.add("fixed");
                         }}
                     >
                         <svg

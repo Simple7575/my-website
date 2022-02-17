@@ -1,6 +1,9 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 
 export default function Form({ formState, setFormState }) {
+    const [successMsgState, setSuccessMsgState] = useState("");
+
     const encode = (data) => {
         return Object.keys(data)
             .map(
@@ -15,6 +18,12 @@ export default function Form({ formState, setFormState }) {
     const closeForm = () => {
         setFormState("close");
         document.body.classList.remove("fixed");
+    };
+
+    const cloesSuccessMsg = (e) => {
+        setSuccessMsgState("");
+        document.body.classList.remove("fixed");
+        setTimeout(() => setFormState("close"), 300);
     };
 
     const formik = useFormik({
@@ -33,14 +42,30 @@ export default function Form({ formState, setFormState }) {
                 },
                 body: encode({ "form-name": "Message", ...values }),
             })
-                .then(() => alert("Success!"))
+                .then(() => {
+                    setSuccessMsgState("open");
+                    onSubmitProps.resetForm();
+                })
                 .catch((error) => alert(error));
-            onSubmitProps.resetForm();
         },
     });
 
     return (
         <div className={`form__container ${formState}`}>
+            <div className={`on-success ${successMsgState}`}>
+                <div className={`on-success__inner ${successMsgState}`}>
+                    <p className="on-success__message">
+                        Thank you for contacting me. I will respond to your
+                        message soon.
+                    </p>
+                    <button
+                        className="on-succes__button"
+                        onClick={cloesSuccessMsg}
+                    >
+                        Close
+                    </button>
+                </div>
+            </div>
             <div className="form__inner__wrapper">
                 <div className="form__headline">
                     <h3>Message me.</h3>
