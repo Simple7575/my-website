@@ -1,16 +1,6 @@
-// import { useinputState } from "inputState";
-
-import { useState } from "react";
+import { useFormik } from "formik";
 
 export default function Form({ formState, setFormState }) {
-    const [inputState, setInputState] = useState({
-        name: "",
-        secondname: "",
-        number: "",
-        email: "",
-        "message-text": "",
-    });
-
     const encode = (data) => {
         return Object.keys(data)
             .map(
@@ -27,47 +17,27 @@ export default function Form({ formState, setFormState }) {
         document.body.classList.remove("fixed");
     };
 
-    const handleChange = (e) => {
-        setInputState({
-            ...inputState,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = (e) => {
-        fetch("/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: encode({ "form-name": "contact", ...inputState }),
-        })
-            .then(() => alert("Success!"))
-            .catch((error) => alert(error));
-        e.preventDefault();
-    };
-
-    // const inputState = useinputState({
-    //     initialValues: {
-    //         name: "",
-    //         secondname: "",
-    //         number: "",
-    //         email: "",
-    //         "message-text": "",
-    //     },
-    //     onSubmit: (values, onSubmitProps) => {
-    //         fetch("/", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/x-www-form-urlencoded",
-    //             },
-    //             body: encode({ "form-name": "contact", .. }),
-    //         })
-    //             .then(() => alert("Success!"))
-    //             .catch((error) => alert(error));
-    //         onSubmitProps.resetForm();
-    //     },
-    // });
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            secondname: "",
+            number: "",
+            email: "",
+            "message-text": "",
+        },
+        onSubmit: (values, onSubmitProps) => {
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: encode({ "form-name": "Message", ...values }),
+            })
+                .then(() => alert("Success!"))
+                .catch((error) => alert(error));
+            onSubmitProps.resetForm();
+        },
+    });
 
     return (
         <div className={`form__container ${formState}`}>
@@ -100,12 +70,11 @@ export default function Form({ formState, setFormState }) {
                 </div>
                 <div className="form__wrapper">
                     <form
-                        onSubmit={handleSubmit}
+                        onSubmit={formik.handleSubmit}
                         // action="/"
                         name="Message"
                         method="POST"
                         data-netlify="true"
-                        netlify-honeypot="bot-field"
                     >
                         <input type="hidden" name="form-name" value="Message" />
                         <div className="form__name">
@@ -115,8 +84,8 @@ export default function Form({ formState, setFormState }) {
                                 type="text"
                                 name="name"
                                 placeholder="Name"
-                                value={inputState.name}
-                                onChange={handleChange}
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
                             />
                         </div>
                         <div className="form__secondname">
@@ -126,8 +95,8 @@ export default function Form({ formState, setFormState }) {
                                 type="text"
                                 name="secondname"
                                 placeholder="Second Name"
-                                value={inputState.secondname}
-                                onChange={handleChange}
+                                value={formik.values.secondname}
+                                onChange={formik.handleChange}
                             />
                         </div>
                         <div className="form__number">
@@ -137,8 +106,8 @@ export default function Form({ formState, setFormState }) {
                                 type="tel"
                                 name="number"
                                 placeholder="Number"
-                                value={inputState.number}
-                                onChange={handleChange}
+                                value={formik.values.number}
+                                onChange={formik.handleChange}
                             />
                         </div>
                         <div className="form__email">
@@ -148,8 +117,8 @@ export default function Form({ formState, setFormState }) {
                                 type="email"
                                 name="email"
                                 placeholder="Mail"
-                                value={inputState.email}
-                                onChange={handleChange}
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
                             />
                         </div>
                         <div className="form__text">
@@ -159,8 +128,8 @@ export default function Form({ formState, setFormState }) {
                                 id="message-text"
                                 cols="30"
                                 rows="7"
-                                value={inputState["message-text"]}
-                                onChange={handleChange}
+                                value={formik.values["message-text"]}
+                                onChange={formik.handleChange}
                             ></textarea>
                         </div>
                         <div className="form__button">
