@@ -1,0 +1,29 @@
+.about {
+    font-family: $ubuntu;
+    color: $text-grey;
+    padding: 0 5rem;
+    margin-top: 5rem;
+
+    @media screen and (max-width: 480px) {
+        padding: 0 1rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    p {
+        padding-left: 3rem;
+        font-size: 1.3rem;
+        margin-top: 1rem;
+        max-width: 70ch;
+
+        @media screen and (max-width: 480px) {
+            padding-left: 1rem;
+        }
+
+        span {
+            color: $text-pink;
+        }
+    }
+}

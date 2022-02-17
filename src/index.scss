@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Comforter&family=Ubuntu:wght@300;500&display=swap");
+
+@import "/src/style/vars.scss";
+@import "/src/style/hero.scss";
+@import "/src/style/skills.scss";
+@import "/src/style/about.scss";
+@import "/src/style/contacts.scss";
+@import "/src/style/footer.scss";
+@import "/src/style/form.scss";
+@import "/src/style/success.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    z-index: -10;
+    color: white;
+    background-color: black;
+
+    &.fixed {
+        overflow: hidden;
+    }
+}
+
+body::-webkit-scrollbar {
+    width: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: greenyellow;
+    border-radius: 5px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: grey;
+}
+
+.js-tilt-glare {
+    border-radius: 47px;
+}
+
+// a {
+//     z-index: 10;
+//     font-family: $comforter, sans-serif;
+//     text-decoration: none;
+//     font-size: 3rem;
+//     color: #e935a1;
+//     position: relative;
+
+//     animation-name: neonmain;
+//     animation-duration: 3s;
+//     animation-iteration-count: infinite;
+//     animation-timing-function: cubic-bezier(0, 1.48, 1, 0.68);
+
+//     &:hover {
+//         color: white;
+//     }
+
+//     &:hover::before {
+//         transform: scale(1.3);
+//         filter: blur(10px);
+//     }
+
+//     &::before {
+//         content: "Simple";
+//         font-family: $comforter, sans-serif;
+//         text-decoration: none;
+//         font-size: 3rem;
+//         color: #e935a1;
+
+//         position: absolute;
+//         z-index: -1;
+
+//         animation-name: neonbefore;
+//         animation-duration: 3s;
+//         animation-iteration-count: infinite;
+//         animation-timing-function: cubic-bezier(0, 1.48, 1, 0.68);
+//     }
+// }
+
+// @keyframes neonmain {
+//     0% {
+//         color: white;
+//     }
+//     30% {
+//         color: #e935a1;
+//     }
+//     60%,
+//     70%,
+//     80% {
+//         color: white;
+//     }
+//     65%,
+//     75%,
+//     85% {
+//         color: #e935a1;
+//     }
+//     100% {
+//         color: white;
+//     }
+// }
+
+// @keyframes neonbefore {
+//     0% {
+//         transform: scale(1.3);
+//         filter: blur(10px);
+//     }
+//     30% {
+//         transform: scale(1);
+//         filter: blur(0px);
+//     }
+//     60%,
+//     70%,
+//     80% {
+//         transform: scale(1.3);
+//         filter: blur(10px);
+//     }
+//     65%,
+//     75%,
+//     85% {
+//         transform: scale(1);
+//         filter: blur(0px);
+//     }
+//     100% {
+//         transform: scale(1);
+//         filter: blur(0px);
+//     }
+// }

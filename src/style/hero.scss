@@ -1,0 +1,360 @@
+.hero {
+    width: 100%;
+    height: 40rem;
+    padding: 2rem 5rem 0rem 5rem;
+    overflow: hidden;
+
+    @media screen and (max-width: 800px) {
+        padding: 2rem 3rem 0rem 3rem;
+        height: 50rem;
+    }
+
+    @media screen and (max-width: 480px) {
+        padding: 2rem 2rem 0rem 2rem;
+    }
+
+    .hero__inner__wrapper {
+        // background-color: rgba(240, 248, 255, 0.144);
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1400px;
+        position: relative;
+        display: flex;
+
+        @media screen and (max-width: 480px) {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header__nav {
+            padding-top: 1rem;
+            margin-right: 7rem;
+            position: absolute;
+            right: 0;
+
+            @media screen and (max-width: 1000px) {
+                margin-right: 5rem;
+            }
+
+            @media screen and (max-width: 800px) {
+                margin-right: 0rem;
+            }
+
+            @media screen and (max-width: 480px) {
+                margin-right: 1.8rem;
+
+                top: -1rem;
+            }
+
+            font-size: 1.2rem;
+            font-family: $ubuntu;
+            font-weight: 300;
+
+            ul {
+                display: flex;
+            }
+
+            li {
+                list-style: none;
+                margin-left: 2rem;
+
+                @media screen and (max-width: 480px) {
+                    margin-left: 1rem;
+                }
+            }
+
+            a {
+                text-decoration: none;
+                position: relative;
+                color: $text-pink;
+                padding-left: 5px;
+                border-left: $text-pink solid 1px;
+                transition: all 50ms linear;
+
+                @media screen and (max-width: 480px) {
+                    border: none;
+                }
+
+                &:hover {
+                    color: white;
+                    text-shadow: 5px 5px 18px $text-pink,
+                        -5px -5px 18px $text-pink;
+                }
+
+                &:hover::before {
+                    transform: scaleX(1);
+                }
+
+                &::before {
+                    z-index: -1;
+                    content: "";
+                    width: 110%;
+                    height: 100%;
+                    left: -1px;
+                    position: absolute;
+                    background: linear-gradient(
+                        90deg,
+                        rgba(125, 125, 125, 0.2125) 45.74%,
+                        rgba(125, 125, 125, 0.1275) 100%
+                    );
+                    transform-origin: left;
+                    transform: scaleX(0);
+                    transition: all 300ms linear;
+                }
+            }
+        }
+
+        .hero__typography {
+            position: relative;
+            padding: 0.3rem 0 0 3rem;
+            display: flex;
+            flex-direction: column;
+            max-width: 27rem;
+            height: 34rem;
+
+            @media screen and (max-width: 480px) {
+                align-items: center;
+                margin-top: 3rem;
+                width: 318px;
+                height: 38rem;
+
+                padding: 0.3rem 0 0 0rem;
+
+                &::before {
+                    position: absolute;
+                    content: "";
+
+                    width: 100%;
+                    height: 460px;
+                    top: 0;
+
+                    background: linear-gradient(
+                        90deg,
+                        rgba(125, 125, 125, 0.2125) 45.74%,
+                        rgba(125, 125, 125, 0.1275) 100%
+                    );
+                }
+
+                &::after {
+                    position: absolute;
+                    content: "";
+                    width: calc(318px / 2);
+                    height: 80px;
+                    bottom: calc(38rem - 540px);
+
+                    border-left: #acacac80 solid 2px;
+                    border-bottom: #acacac80 solid 2px;
+                    transform: rotate(180deg);
+                    left: 0;
+                }
+            }
+
+            .logo {
+                align-self: start;
+                width: max-content;
+                z-index: 10;
+                font-family: $comforter, sans-serif;
+                color: $text-pink;
+                position: relative;
+
+                @media screen and (max-width: 480px) {
+                    // align-self: center;
+                    margin-left: 1rem;
+                }
+
+                &::before {
+                    position: absolute;
+                    content: "";
+                    left: -3rem;
+
+                    width: 180%;
+                    height: 25rem;
+
+                    background: linear-gradient(
+                        90deg,
+                        rgba(125, 125, 125, 0.2125) 45.74%,
+                        rgba(125, 125, 125, 0.1275) 100%
+                    );
+
+                    @media screen and (max-width: 480px) {
+                        display: none;
+                    }
+                }
+
+                &::after {
+                    position: absolute;
+                    content: "";
+                    left: -3rem;
+                    top: 0;
+
+                    width: 4.5rem;
+                    height: 31.9rem;
+                    border-left: #72727280 solid 2px;
+                    border-bottom: #72727280 solid 2px;
+
+                    @media screen and (max-width: 480px) {
+                        display: none;
+                    }
+                }
+
+                h2 {
+                    font-size: 4rem;
+                    position: relative;
+                    font-weight: normal;
+
+                    @media screen and (max-width: 480px) {
+                        font-size: 58.0476px;
+                    }
+
+                    position: relative;
+                    animation-name: neonmain;
+                    animation-duration: 3s;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: cubic-bezier(0, 1.48, 1, 0.68);
+
+                    // &:hover::before {
+                    //     transform: scale(1.3);
+                    //     filter: blur(10px);
+                    // }
+
+                    // &::before {
+                    //     content: "Simple";
+                    //     font-family: $comforter, sans-serif;
+                    //     text-decoration: none;
+                    //     font-size: 4rem;
+                    //     color: #e935a1;
+
+                    //     position: absolute;
+                    //     z-index: -1;
+
+                    //     animation-name: neonbefore;
+                    //     animation-duration: 3s;
+                    //     animation-iteration-count: infinite;
+                    //     animation-timing-function: cubic-bezier(
+                    //         0,
+                    //         1.48,
+                    //         1,
+                    //         0.68
+                    //     );
+                    // }
+
+                    // @keyframes neonmain {
+                    //     0% {
+                    //         color: white;
+                    //     }
+                    //     30% {
+                    //         color: #e935a1;
+                    //     }
+                    //     60%,
+                    //     70%,
+                    //     80% {
+                    //         color: white;
+                    //     }
+                    //     65%,
+                    //     75%,
+                    //     85% {
+                    //         color: #e935a1;
+                    //     }
+                    //     100% {
+                    //         color: white;
+                    //     }
+                    // }
+
+                    // @keyframes neonbefore {
+                    //     0% {
+                    //         transform: scale(1.3);
+                    //         filter: blur(10px);
+                    //     }
+                    //     30% {
+                    //         transform: scale(1);
+                    //         filter: blur(0px);
+                    //     }
+                    //     60%,
+                    //     70%,
+                    //     80% {
+                    //         transform: scale(1.3);
+                    //         filter: blur(10px);
+                    //     }
+                    //     65%,
+                    //     75%,
+                    //     85% {
+                    //         transform: scale(1);
+                    //         filter: blur(0px);
+                    //     }
+                    //     100% {
+                    //         transform: scale(1);
+                    //         filter: blur(0px);
+                    //     }
+                    // }
+                }
+            }
+
+            .hero__headline {
+                font-size: 3rem;
+                margin-top: 4rem;
+                color: $text-grey;
+                font-family: $ubuntu;
+                font-weight: 300;
+
+                @media screen and (max-width: 480px) {
+                    text-align: center;
+                    max-width: 10ch;
+                    font-size: 38.4403px;
+                }
+            }
+
+            .hero__button {
+                width: 160px;
+                height: 55px;
+                cursor: pointer;
+                margin-top: auto;
+                margin-left: 2.3rem;
+                border-radius: 5px;
+                border: none;
+                color: rgba(255, 255, 255, 0.829);
+                font-size: 1.2rem;
+                text-shadow: 0px 0px 18px rgba(255, 255, 255, 0.36);
+
+                background-color: $header-btn-color;
+                box-shadow: -1px -3px 9px $header-btn-shadow,
+                    1px 3px 9px $header-btn-shadow;
+                border-radius: 7px;
+                transition: all 50ms linear;
+
+                @media screen and (max-width: 480px) {
+                    margin-left: 0rem;
+                }
+
+                &:hover {
+                    color: rgb(255, 255, 255);
+                    background-color: #292929;
+                    text-shadow: 0px 0px 18px rgba(255, 255, 255, 0.87);
+                }
+            }
+        }
+
+        .hero__img {
+            position: absolute;
+            bottom: -5rem;
+            right: -5rem;
+            z-index: -2;
+
+            @media screen and (max-width: 1000px) {
+                right: -10rem;
+            }
+
+            @media screen and (max-width: 800px) {
+                right: -20rem;
+            }
+
+            @media screen and (max-width: 480px) {
+                right: unset;
+                left: -28rem;
+            }
+
+            img {
+                max-width: 58rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+.skills {
+    margin-top: 2.7rem;
+    color: $text-grey;
+    font-family: $ubuntu;
+    display: flex;
+    flex-direction: column;
+
+    .skills__headline {
+        text-align: center;
+        font-size: 2rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .skills__icons__wrapper {
+        max-width: 1100px;
+        margin: 5rem auto 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        gap: 1rem 15em;
+
+        @media screen and (max-width: 800px) {
+            gap: 2rem 7em;
+        }
+
+        @media screen and (max-width: 480px) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .skills__icons {
+            display: flex;
+            align-items: center;
+        }
+
+        span {
+            font-size: 2rem;
+            margin-left: 2rem;
+        }
+
+        .skills__icons.last {
+            justify-self: center;
+            grid-column: 1/3;
+        }
+    }
+}
