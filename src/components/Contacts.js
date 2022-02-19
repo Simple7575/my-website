@@ -14,9 +14,7 @@ export default function Contacts({ setFormState }) {
     };
 
     const whatsAppError = () => {
-        alert(
-            "Sorry my whatsApp is down at moment, please try Telegram or send me email:)"
-        );
+        alert("Please contact me via Telegram or send me an email:)");
     };
 
     useEffect(() => {

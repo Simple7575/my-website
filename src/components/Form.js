@@ -111,6 +111,7 @@ export default function Form({ formState, setFormState }) {
                                 placeholder="Name"
                                 value={formik.values.name}
                                 onChange={formik.handleChange}
+                                required
                             />
                         </div>
                         <div className="form__secondname">
@@ -122,6 +123,7 @@ export default function Form({ formState, setFormState }) {
                                 placeholder="Second Name"
                                 value={formik.values.secondname}
                                 onChange={formik.handleChange}
+                                required
                             />
                         </div>
                         <div className="form__number">
@@ -144,6 +146,7 @@ export default function Form({ formState, setFormState }) {
                                 placeholder="Mail"
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
+                                required
                             />
                         </div>
                         <div className="form__text">
@@ -155,6 +158,7 @@ export default function Form({ formState, setFormState }) {
                                 rows="7"
                                 value={formik.values["message-text"]}
                                 onChange={formik.handleChange}
+                                required
                             ></textarea>
                         </div>
                         <div className="form__button">
