@@ -55,8 +55,8 @@ export default function Form({ formState, setFormState }) {
             <div className={`on-success ${successMsgState}`}>
                 <div className={`on-success__inner ${successMsgState}`}>
                     <p className="on-success__message">
-                        Thank you for contacting me. I will respond to your
-                        message soon.
+                        Thank you for contacting me. I will be in touch with you
+                        shortly.
                     </p>
                     <button
                         className="on-succes__button"
