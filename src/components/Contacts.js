@@ -1,11 +1,13 @@
 import Tilt from "vanilla-tilt";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import styles from "../style/contacts.module.scss";
 
 export default function Contacts({ setFormState }) {
     // const instaUrl = "http://instagram.com/_u/Elena_Kursk_/";
     // const whatsAppUrl = "https://wa.me/+79510873070";
 
     // Use international telephone number format without + but with %2B.
+    const wrapperRef = useRef();
     const telegramUrl = "https://telegram.me/SimpleGM";
     const viberUrl = "viber://contact?number=%2B79011236604";
 
@@ -18,7 +20,7 @@ export default function Contacts({ setFormState }) {
     };
 
     useEffect(() => {
-        const element = document.querySelector(".contacts__wrapper");
+        const element = wrapperRef.current;
 
         Tilt.init(element, {
             glare: true,
@@ -27,13 +29,13 @@ export default function Contacts({ setFormState }) {
     }, []);
 
     return (
-        <div className="contacts" id="contacts">
-            <div className="contacts__wrapper">
-                <div className="contacts__items first">
+        <div className={styles.contacts} id="contacts">
+            <div className={styles.contacts__wrapper} ref={wrapperRef}>
+                <div className={`${styles.contacts__items} ${styles.first}`}>
                     <h3>Contacts</h3>
                 </div>
-                <div className="contacts__items">
-                    <div className="contacts__icon" onClick={goTo(telegramUrl)}>
+                <div className={styles.contacts__items}>
+                    <div className={styles.contacts__icon} onClick={goTo(telegramUrl)}>
                         <svg
                             width="82"
                             height="82"
@@ -42,12 +44,7 @@ export default function Contacts({ setFormState }) {
                             xmlns="http://www.w3.org/2000/svg"
                         >
                             <g clipPath="url(#clip0_31_98)">
-                                <rect
-                                    width="82"
-                                    height="82"
-                                    rx="41"
-                                    fill="white"
-                                />
+                                <rect width="82" height="82" rx="41" fill="white" />
                                 <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
@@ -63,8 +60,8 @@ export default function Contacts({ setFormState }) {
                         </svg>
                     </div>
                 </div>
-                <div className="contacts__items">
-                    <div className="contacts__icon" onClick={goTo(viberUrl)}>
+                <div className={styles.contacts__items}>
+                    <div className={styles.contacts__icon} onClick={goTo(viberUrl)}>
                         <svg
                             width="82"
                             height="82"
@@ -79,8 +76,8 @@ export default function Contacts({ setFormState }) {
                         </svg>
                     </div>
                 </div>
-                <div className="contacts__items">
-                    <div className="contacts__icon" onClick={whatsAppError}>
+                <div className={styles.contacts__items}>
+                    <div className={styles.contacts__icon} onClick={whatsAppError}>
                         <svg
                             width="82"
                             height="82"
@@ -104,11 +101,11 @@ export default function Contacts({ setFormState }) {
                         </svg>
                     </div>
                 </div>
-                <div className="contacts__items last">
+                <div className={`${styles.contacts__items} ${styles.last}`}>
                     <div
-                        className="contacts__icon"
+                        className={styles.contacts__icon}
                         onClick={() => {
-                            setFormState("open");
+                            setFormState(false);
                             document.body.classList.add("fixed");
                         }}
                     >
@@ -143,11 +140,7 @@ export default function Contacts({ setFormState }) {
                             </g>
                             <defs>
                                 <clipPath id="clip0_31_107">
-                                    <rect
-                                        width="108.992"
-                                        height="82.1699"
-                                        fill="white"
-                                    />
+                                    <rect width="108.992" height="82.1699" fill="white" />
                                 </clipPath>
                             </defs>
                         </svg>

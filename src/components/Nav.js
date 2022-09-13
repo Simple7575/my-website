@@ -1,9 +1,9 @@
-import React from "react";
+import styles from "../style/hero.module.scss";
 
 export default function Nav() {
     return (
         <>
-            <nav className="header__nav">
+            <nav className={styles.header__nav}>
                 <ul>
                     <li>
                         <a href="#skills">Skills</a>
@@ -13,6 +13,9 @@ export default function Nav() {
                     </li>
                     <li>
                         <a href="#contacts">Contacts</a>
+                    </li>
+                    <li>
+                        <a href="#examples">Examples</a>
                     </li>
                 </ul>
             </nav>

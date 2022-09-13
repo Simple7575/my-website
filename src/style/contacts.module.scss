@@ -1,3 +1,5 @@
+@use "./vars.scss" as *;
+
 .contacts {
     width: 100%;
     margin-top: 5rem;
@@ -19,8 +21,7 @@
             rgba(184, 184, 184, 0.1377) 26.85%,
             rgba(184, 184, 184, 0.0408) 78.2%
         );
-        box-shadow: -4px -3px 20px rgba(184, 184, 184, 0.39),
-            4px 3px 12px rgba(184, 184, 184, 0.14);
+        box-shadow: -4px -3px 20px rgba(184, 184, 184, 0.39), 4px 3px 12px rgba(184, 184, 184, 0.14);
         border-radius: 47px;
 
         display: grid;

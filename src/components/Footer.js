@@ -1,9 +1,9 @@
-import React from "react";
+import styles from "../style/footer.module.scss";
 
 export default function Footer() {
     return (
-        <div className="footer">
-            <div className="footer__logo">
+        <div className={styles.footer}>
+            <div className={styles.footer__logo}>
                 <h2>Simple</h2>
             </div>
         </div>

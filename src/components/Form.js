@@ -1,29 +1,25 @@
 import { useFormik } from "formik";
 import { useState } from "react";
+import styles from "../style/form.module.scss";
 
 export default function Form({ formState, setFormState }) {
-    const [successMsgState, setSuccessMsgState] = useState("");
+    const [successMsgState, setSuccessMsgState] = useState(true);
 
     const encode = (data) => {
         return Object.keys(data)
-            .map(
-                (key) =>
-                    encodeURIComponent(key) +
-                    "=" +
-                    encodeURIComponent(data[key])
-            )
+            .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
             .join("&");
     };
 
     const closeForm = () => {
-        setFormState("close");
+        setFormState(true);
         document.body.classList.remove("fixed");
     };
 
-    const cloesSuccessMsg = (e) => {
-        setSuccessMsgState("");
+    const closeSuccessMsg = (e) => {
+        setSuccessMsgState(true);
         document.body.classList.remove("fixed");
-        setTimeout(() => setFormState("close"), 300);
+        setTimeout(() => setFormState(true), 300);
     };
 
     const formik = useFormik({
@@ -43,7 +39,7 @@ export default function Form({ formState, setFormState }) {
                 body: encode({ "form-name": "Message", ...values }),
             })
                 .then(() => {
-                    setSuccessMsgState("open");
+                    setSuccessMsgState(false);
                     onSubmitProps.resetForm();
                 })
                 .catch((error) => alert(error));
@@ -51,26 +47,24 @@ export default function Form({ formState, setFormState }) {
     });
 
     return (
-        <div className={`form__container ${formState}`}>
-            <div className={`on-success ${successMsgState}`}>
-                <div className={`on-success__inner ${successMsgState}`}>
-                    <p className="on-success__message">
-                        Thank you for contacting me. I will be in touch with you
-                        shortly.
+        <div className={`${styles.form__container} ${formState ? styles.close : styles.open}`}>
+            <div className={`${styles.on_success} ${successMsgState ? "" : styles.open}`}>
+                <div
+                    className={`${styles.on_success__inner} ${successMsgState ? "" : styles.open}`}
+                >
+                    <p className={styles.on_success__message}>
+                        Thank you for contacting me. I will be in touch with you shortly.
                     </p>
-                    <button
-                        className="on-succes__button"
-                        onClick={cloesSuccessMsg}
-                    >
+                    <button className={styles.on_success__button} onClick={closeSuccessMsg}>
                         Close
                     </button>
                 </div>
             </div>
-            <div className="form__inner__wrapper">
-                <div className="form__headline">
+            <div className={styles.form__inner__wrapper}>
+                <div className={styles.form__headline}>
                     <h3>Message me.</h3>
                 </div>
-                <div className="form__close">
+                <div className={styles.form__close}>
                     <svg
                         onClick={closeForm}
                         width="30"
@@ -93,7 +87,7 @@ export default function Form({ formState, setFormState }) {
                         />
                     </svg>
                 </div>
-                <div className="form__wrapper">
+                <div className={styles.form__wrapper}>
                     <form
                         onSubmit={formik.handleSubmit}
                         // action="/"
@@ -102,7 +96,7 @@ export default function Form({ formState, setFormState }) {
                         data-netlify="true"
                     >
                         <input type="hidden" name="form-name" value="Message" />
-                        <div className="form__name">
+                        <div className={styles.form__name}>
                             <label htmlFor="name">Name</label>
                             <input
                                 id="name"
@@ -114,7 +108,7 @@ export default function Form({ formState, setFormState }) {
                                 required
                             />
                         </div>
-                        <div className="form__secondname">
+                        <div className={styles.form__secondname}>
                             <label htmlFor="secondname">Second Name</label>
                             <input
                                 id="secondname"
@@ -126,7 +120,7 @@ export default function Form({ formState, setFormState }) {
                                 required
                             />
                         </div>
-                        <div className="form__number">
+                        <div className={styles.form__number}>
                             <label htmlFor="number">Number</label>
                             <input
                                 id="number"
@@ -137,7 +131,7 @@ export default function Form({ formState, setFormState }) {
                                 onChange={formik.handleChange}
                             />
                         </div>
-                        <div className="form__email">
+                        <div className={styles.form__email}>
                             <label htmlFor="email">Mail</label>
                             <input
                                 id="email"
@@ -149,7 +143,7 @@ export default function Form({ formState, setFormState }) {
                                 required
                             />
                         </div>
-                        <div className="form__text">
+                        <div className={styles.form__text}>
                             <label htmlFor="message-text"></label>
                             <textarea
                                 name="message-text"
@@ -161,10 +155,10 @@ export default function Form({ formState, setFormState }) {
                                 required
                             ></textarea>
                         </div>
-                        <div className="form__button">
+                        <div className={styles.form__button}>
                             <button type="submit">Send</button>
                         </div>
-                        <div className="form__icon">
+                        <div className={styles.form__icon}>
                             <svg
                                 width="75"
                                 height="64"
