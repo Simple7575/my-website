@@ -19,6 +19,7 @@ export default function Hero({ setFormState }) {
     };
 
     useEffect(() => {
+        const current = targetRef.current;
         const obsOptions = {
             root: null,
             rootMargin: "-200px 0px 0px 0px",
@@ -28,7 +29,7 @@ export default function Hero({ setFormState }) {
         observer.observe(targetRef.current);
 
         return () => {
-            observer.unobserve(targetRef.current);
+            observer.unobserve(current);
         };
     }, []);
 
