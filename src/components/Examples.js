@@ -1,5 +1,5 @@
-import { useState } from "react";
 import styles from "../style/examples.module.scss";
+import { useState } from "react";
 
 export default function Examples() {
     const [frName, setFrName] = useState("");

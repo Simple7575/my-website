@@ -1,13 +1,48 @@
 import styles from "../style/skills.module.scss";
+import { useRef, useEffect } from "react";
 
 export default function Skills() {
+    const targetRef = useRef();
+
+    const obsClback = (entries, observer) => {
+        for (let entry of entries) {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove(styles.hide);
+                entry.target.classList.add(styles.show);
+            } else {
+                entry.target.classList.remove(styles.show);
+                entry.target.classList.add(styles.hide);
+            }
+        }
+    };
+
+    useEffect(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: "-90px 0px -90px 0px",
+            threshold: 0,
+        };
+        const targets = targetRef.current.children;
+        const observer = new IntersectionObserver(obsClback, observerOptions);
+
+        for (let target of targets) {
+            observer.observe(target);
+        }
+
+        return () => {
+            for (let target of targets) {
+                observer.unobserve(target);
+            }
+        };
+    }, []);
+
     return (
         <div className={styles.skills} id="skills">
             <div className={styles.skills__headline}>
                 <h2>Skills & Knowledge</h2>
             </div>
-            <div className={styles.skills__icons__wrapper}>
-                <div className={styles.skills__icons}>
+            <div className={styles.skills__icons__wrapper} ref={targetRef}>
+                <div className={`${styles.skills__icons} `}>
                     <svg
                         width="74"
                         height="98"
@@ -48,7 +83,7 @@ export default function Skills() {
 
                     <span>HTML</span>
                 </div>
-                <div className={styles.skills__icons}>
+                <div className={`${styles.skills__icons} `}>
                     <svg
                         width="90"
                         height="80"
@@ -75,7 +110,7 @@ export default function Skills() {
                     </svg>
                     <span>React.js</span>
                 </div>
-                <div className={styles.skills__icons}>
+                <div className={`${styles.skills__icons} `}>
                     <svg
                         width="75"
                         height="99"
@@ -111,7 +146,7 @@ export default function Skills() {
                     </svg>
                     <span>CSS</span>
                 </div>
-                <div className={styles.skills__icons}>
+                <div className={`${styles.skills__icons} `}>
                     <svg
                         width="71"
                         height="81"
@@ -133,7 +168,7 @@ export default function Skills() {
                     </svg>
                     <span>Node.js</span>
                 </div>
-                <div className={styles.skills__icons}>
+                <div className={`${styles.skills__icons} `}>
                     <svg
                         width="74"
                         height="85"
@@ -148,7 +183,7 @@ export default function Skills() {
                     </svg>
                     <span>JavaScript</span>
                 </div>
-                <div className={styles.skills__icons}>
+                <div className={`${styles.skills__icons} `}>
                     <svg
                         width="82"
                         height="81"
@@ -187,7 +222,7 @@ export default function Skills() {
                     </svg>
                     <span>WordPress</span>
                 </div>
-                <div className={styles.skills__icons}>
+                <div className={`${styles.skills__icons} `}>
                     <svg
                         width="66"
                         height="99"
@@ -225,7 +260,7 @@ export default function Skills() {
                     </svg>
                     <span>Figma</span>
                 </div>
-                <div className={styles.skills__icons}>
+                <div className={`${styles.skills__icons} `}>
                     <svg
                         width="90"
                         height="67"
@@ -247,7 +282,7 @@ export default function Skills() {
                     </svg>
                     <span>Sass</span>
                 </div>
-                <div className={`${styles.skills__icons} ${styles.last}`}>
+                <div className={`${`${styles.skills__icons} `} ${styles.last}`}>
                     <svg
                         width="119"
                         height="81"

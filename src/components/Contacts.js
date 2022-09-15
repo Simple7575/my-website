@@ -1,6 +1,6 @@
+import styles from "../style/contacts.module.scss";
 import Tilt from "vanilla-tilt";
 import { useEffect, useRef } from "react";
-import styles from "../style/contacts.module.scss";
 
 export default function Contacts({ setFormState }) {
     // const instaUrl = "http://instagram.com/_u/Elena_Kursk_/";

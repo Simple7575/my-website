@@ -1,6 +1,6 @@
+import styles from "../style/form.module.scss";
 import { useFormik } from "formik";
 import { useState } from "react";
-import styles from "../style/form.module.scss";
 
 export default function Form({ formState, setFormState }) {
     const [successMsgState, setSuccessMsgState] = useState(true);

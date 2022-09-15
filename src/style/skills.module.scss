@@ -32,6 +32,49 @@
         .skills__icons {
             display: flex;
             align-items: center;
+            transition: all 300ms linear;
+
+            @media (prefers-reduced-motion) {
+                transition: none;
+            }
+
+            &.show {
+                opacity: 1;
+                // filter: blur(0);
+                transform: translateX(0);
+            }
+
+            &.hide {
+                opacity: 0;
+                transform: translateX(-100%);
+
+                svg {
+                    transition: all 300ms;
+                    filter: blur(5px);
+                }
+            }
+
+            // &.hide:nth-child(even) {
+            //     opacity: 0;
+            //     filter: blur(5px);
+            //     transform: translateX(100%);
+            //     visibility: hidden;
+            // }
+
+            // &.hide:nth-child(odd) {
+            //     opacity: 0;
+            //     filter: blur(5px);
+            //     transform: translateX(-100%);
+            //     visibility: hidden;
+            // }
+
+            &:nth-child(even) {
+                transition-delay: 250ms;
+
+                svg {
+                    transition-delay: 250ms;
+                }
+            }
         }
 
         span {
