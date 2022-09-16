@@ -117,6 +117,20 @@
         backdrop-filter: blur(17px);
         border-radius: 52px;
 
+        @supports (backdrop-filter: blur()) {
+            & {
+                backdrop-filter: blur(17px);
+            }
+        }
+
+        // this part is for fallback if browser not support blur (like FF)
+        // set bc to grey for text to be readable
+        @supports not (backdrop-filter: blur()) {
+            & {
+                background-color: rgba(53, 53, 53, 0.897);
+            }
+        }
+
         @media screen and (max-width: 800px) {
             width: 590px;
             padding: 34px 50px;
