@@ -42,7 +42,7 @@ export default function Hero({ setFormState }) {
         <div className={styles.hero} ref={targetRef}>
             <div className={styles.hero__inner__wrapper}>
                 <Nav trgtClassNm={trgtClassNm} />
-                <div className={styles.hero__typography}>
+                <div className={`${styles.hero__typography} ${styles[trgtClassNm]}`}>
                     <div className={`${styles.logo} ${styles[trgtClassNm]}`}>
                         <h2 className="">Simple</h2>
                     </div>
