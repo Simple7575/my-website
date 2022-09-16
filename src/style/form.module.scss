@@ -170,22 +170,42 @@
                 }
 
                 label {
-                    display: none;
-                }
+                    position: relative;
 
-                input {
-                    width: 130px;
-                    background-color: transparent;
-                    border: none;
-                    border-bottom: 2px solid #aeaeae7c;
-                    color: white;
-
-                    @media screen and (max-width: 480px) {
-                        width: 130px;
+                    .placeholder {
+                        position: absolute;
+                        color: rgba(255, 255, 255, 0.4);
+                        left: 2px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-size: 14px;
+                        transition: all 200ms ease-out;
                     }
 
-                    &:focus {
-                        outline: none;
+                    input {
+                        width: 130px;
+                        background-color: transparent;
+                        border: none;
+                        border-bottom: 2px solid #aeaeae7c;
+                        color: white;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &:focus + .placeholder {
+                            top: -13px;
+                            color: white;
+                        }
+
+                        &.full + .placeholder {
+                            top: -13px;
+                            color: white;
+                        }
+
+                        @media screen and (max-width: 480px) {
+                            width: 130px;
+                        }
                     }
                 }
 
@@ -205,8 +225,38 @@
                     }
 
                     svg {
-                        @media screen and (max-width: 480px) {
-                            width: 65px;
+                        // @media screen and (max-width: 480px) {
+                        //     width: 65px;
+                        // }
+
+                        path:nth-child(1) {
+                            animation: form-svg 4s ease-out 0s infinite;
+                        }
+                        path:nth-child(2) {
+                            animation: form-svg 4s ease-out 100ms infinite;
+                        }
+                    }
+
+                    @keyframes form-svg {
+                        0% {
+                            transform: translateX(0px);
+                            fill: #aeaeae;
+                        }
+                        85% {
+                            transform: translateX(0px);
+                            fill: #aeaeae;
+                        }
+                        90% {
+                            transform: translateX(5px);
+                            fill: #11dd0d;
+                        }
+                        97% {
+                            transform: translateX(-2px);
+                            fill: #1abcfe;
+                        }
+                        100% {
+                            transform: translateX(0px);
+                            fill: #aeaeae;
                         }
                     }
                 }

@@ -46,6 +46,10 @@ export default function Form({ formState, setFormState }) {
         },
     });
 
+    const isInputFull = (inputName) => {
+        return formik.values[inputName].length > 0 ? "full" : "";
+    };
+
     return (
         <div className={`${styles.form__container} ${formState ? styles.close : styles.open}`}>
             <div className={`${styles.on_success} ${successMsgState ? "" : styles.open}`}>
@@ -97,51 +101,60 @@ export default function Form({ formState, setFormState }) {
                     >
                         <input type="hidden" name="form-name" value="Message" />
                         <div className={styles.form__name}>
-                            <label htmlFor="name">Name</label>
-                            <input
-                                id="name"
-                                type="text"
-                                name="name"
-                                placeholder="Name"
-                                value={formik.values.name}
-                                onChange={formik.handleChange}
-                                required
-                            />
+                            <label htmlFor="name">
+                                <input
+                                    className={styles[isInputFull("name")]}
+                                    id="name"
+                                    type="text"
+                                    name="name"
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
+                                    required
+                                />
+                                <span className={styles.placeholder}>Name</span>
+                            </label>
                         </div>
                         <div className={styles.form__secondname}>
-                            <label htmlFor="secondname">Second Name</label>
-                            <input
-                                id="secondname"
-                                type="text"
-                                name="secondname"
-                                placeholder="Second Name"
-                                value={formik.values.secondname}
-                                onChange={formik.handleChange}
-                                required
-                            />
+                            <label htmlFor="secondname">
+                                <input
+                                    className={styles[isInputFull("secondname")]}
+                                    id="secondname"
+                                    type="text"
+                                    name="secondname"
+                                    value={formik.values.secondname}
+                                    onChange={formik.handleChange}
+                                    required
+                                />
+
+                                <span className={styles.placeholder}>Second Name</span>
+                            </label>
                         </div>
                         <div className={styles.form__number}>
-                            <label htmlFor="number">Number</label>
-                            <input
-                                id="number"
-                                type="tel"
-                                name="number"
-                                placeholder="Number"
-                                value={formik.values.number}
-                                onChange={formik.handleChange}
-                            />
+                            <label htmlFor="number">
+                                <input
+                                    className={styles[isInputFull("number")]}
+                                    id="number"
+                                    type="tel"
+                                    name="number"
+                                    value={formik.values.number}
+                                    onChange={formik.handleChange}
+                                />
+                                <span className={styles.placeholder}>Number</span>
+                            </label>
                         </div>
                         <div className={styles.form__email}>
-                            <label htmlFor="email">Mail</label>
-                            <input
-                                id="email"
-                                type="email"
-                                name="email"
-                                placeholder="Mail"
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                required
-                            />
+                            <label htmlFor="email">
+                                <input
+                                    className={styles[isInputFull("email")]}
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                    required
+                                />
+                                <span className={styles.placeholder}>Mail</span>
+                            </label>
                         </div>
                         <div className={styles.form__text}>
                             <label htmlFor="message-text"></label>
@@ -160,7 +173,8 @@ export default function Form({ formState, setFormState }) {
                         </div>
                         <div className={styles.form__icon}>
                             <svg
-                                width="75"
+                                id="form-svg-path"
+                                width="82"
                                 height="64"
                                 viewBox="0 0 75 64"
                                 fill="none"
