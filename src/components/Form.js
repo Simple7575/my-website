@@ -1,11 +1,10 @@
 import styles from "../style/form.module.scss";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Form({ formState, setFormState }) {
     const [successMsgState, setSuccessMsgState] = useState(true);
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const encode = (data) => {
         return Object.keys(data)
