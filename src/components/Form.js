@@ -1,9 +1,11 @@
 import styles from "../style/form.module.scss";
+import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Form({ formState, setFormState }) {
     const [successMsgState, setSuccessMsgState] = useState(true);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const encode = (data) => {
         return Object.keys(data)
@@ -21,6 +23,17 @@ export default function Form({ formState, setFormState }) {
         document.body.classList.remove("fixed");
         setTimeout(() => setFormState(true), 300);
     };
+
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("*Required"),
+        secondname: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("*Required"),
+        email: Yup.string().email("Invalid email").required("*Required"),
+        number: Yup.number().required("*Required").typeError("Must be a number."),
+        "message-text": Yup.string()
+            .min(50, "Please provide at least 50 characters")
+            .max(1000, "Message is to long")
+            .required("*Required"),
+    });
 
     const formik = useFormik({
         initialValues: {
@@ -44,10 +57,15 @@ export default function Form({ formState, setFormState }) {
                 })
                 .catch((error) => alert(error));
         },
+        validationSchema,
     });
 
     const isInputFull = (inputName) => {
         return formik.values[inputName].length > 0 ? "full" : "";
+    };
+
+    const isTouched = (inputName) => {
+        return formik.touched[inputName] || false;
     };
 
     return (
@@ -100,7 +118,7 @@ export default function Form({ formState, setFormState }) {
                         data-netlify="true"
                     >
                         <input type="hidden" name="form-name" value="Message" />
-                        <div className={styles.form__name}>
+                        <div className={`${styles.form__name} ${styles.inputs__wrappers}`}>
                             <label htmlFor="name">
                                 <input
                                     className={styles[isInputFull("name")]}
@@ -109,12 +127,15 @@ export default function Form({ formState, setFormState }) {
                                     name="name"
                                     value={formik.values.name}
                                     onChange={formik.handleChange}
-                                    required
+                                    onBlur={formik.handleBlur}
                                 />
                                 <span className={styles.placeholder}>Name</span>
                             </label>
+                            {isTouched("name") && formik.errors.name ? (
+                                <span className={styles.erorr__messsage}>{formik.errors.name}</span>
+                            ) : null}
                         </div>
-                        <div className={styles.form__secondname}>
+                        <div className={`${styles.form__secondname} ${styles.inputs__wrappers}`}>
                             <label htmlFor="secondname">
                                 <input
                                     className={styles[isInputFull("secondname")]}
@@ -123,13 +144,17 @@ export default function Form({ formState, setFormState }) {
                                     name="secondname"
                                     value={formik.values.secondname}
                                     onChange={formik.handleChange}
-                                    required
+                                    onBlur={formik.handleBlur}
                                 />
-
                                 <span className={styles.placeholder}>Second Name</span>
                             </label>
+                            {isTouched("secondname") && formik.errors.secondname ? (
+                                <span className={styles.erorr__messsage}>
+                                    {formik.errors.secondname}
+                                </span>
+                            ) : null}
                         </div>
-                        <div className={styles.form__number}>
+                        <div className={`${styles.form__number} ${styles.inputs__wrappers}`}>
                             <label htmlFor="number">
                                 <input
                                     className={styles[isInputFull("number")]}
@@ -138,11 +163,18 @@ export default function Form({ formState, setFormState }) {
                                     name="number"
                                     value={formik.values.number}
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    required
                                 />
                                 <span className={styles.placeholder}>Number</span>
                             </label>
+                            {isTouched("number") && formik.errors.number ? (
+                                <span className={styles.erorr__messsage}>
+                                    {formik.errors.number}
+                                </span>
+                            ) : null}
                         </div>
-                        <div className={styles.form__email}>
+                        <div className={`${styles.form__email} ${styles.inputs__wrappers}`}>
                             <label htmlFor="email">
                                 <input
                                     className={styles[isInputFull("email")]}
@@ -151,13 +183,20 @@ export default function Form({ formState, setFormState }) {
                                     name="email"
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
-                                    required
+                                    onBlur={formik.handleBlur}
                                 />
                                 <span className={styles.placeholder}>Mail</span>
                             </label>
+                            {isTouched("email") && formik.errors.email ? (
+                                <span className={styles.erorr__messsage}>
+                                    {formik.errors.email}
+                                </span>
+                            ) : null}
                         </div>
-                        <div className={styles.form__text}>
-                            <label htmlFor="message-text"></label>
+                        <div className={`${styles.form__text} ${styles.inputs__wrappers}`}>
+                            <label htmlFor="message-text">
+                                Your message needs to be at least 50 characters long.
+                            </label>
                             <textarea
                                 name="message-text"
                                 id="message-text"
@@ -165,11 +204,18 @@ export default function Form({ formState, setFormState }) {
                                 rows="7"
                                 value={formik.values["message-text"]}
                                 onChange={formik.handleChange}
-                                required
+                                onBlur={formik.handleBlur}
                             ></textarea>
+                            {isTouched("message-text") && formik.errors["message-text"] ? (
+                                <span className={styles.erorr__messsage}>
+                                    {formik.errors["message-text"]}
+                                </span>
+                            ) : null}
                         </div>
                         <div className={styles.form__button}>
-                            <button type="submit">Send</button>
+                            <button type="submit" disabled={!(formik.isValid && formik.dirty)}>
+                                Send
+                            </button>
                         </div>
                         <div className={styles.form__icon}>
                             <svg

@@ -11,6 +11,36 @@ import Form from "./components/Form.js";
 
 function App() {
     const [formState, setFormState] = useState(true);
+    // let rectangleArea = (length, width) => {
+    //     return length + width;
+    // };
+
+    // const countParams = (fn) => {
+    //     console.log(fn.length);
+    //     return (...params) => {
+    //         if (params.length !== fn.length) {
+    //             throw new Error(`Incorrect num in fn:${fn.name}`);
+    //         }
+    //         return fn(...params);
+    //     };
+    // };
+
+    // const requireIntegers = (fn) => {
+    //     console.log(fn.length);
+    //     return (...params) => {
+    //         for (let param of params) {
+    //             if (!Number.isInteger(param)) {
+    //                 throw new Error(`Not int in fn: ${fn.name}`);
+    //             }
+    //         }
+    //         return fn(...params);
+    //     };
+    // };
+
+    // // console.log(rectangleArea.length);
+    // rectangleArea = countParams(rectangleArea);
+    // rectangleArea = requireIntegers(rectangleArea);
+    // console.log(rectangleArea.length);
 
     return (
         <div className="App">
