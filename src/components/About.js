@@ -1,9 +1,11 @@
 import styles from "../style/about.module.scss";
+import TextParticles from "./Particles/TextParticles";
 
 export default function About() {
     return (
         <div className={styles.about} id="about">
-            <h2>About me:</h2>
+            <TextParticles />
+            {/* <h2>About me:</h2> */}
             <p>
                 I am a fullstack web developer. From the very beginning of my programming journey I
                 fell in love with it, it was absolutely clear that this was what I wanted to do for
