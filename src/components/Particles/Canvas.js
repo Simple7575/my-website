@@ -1,3 +1,4 @@
+/* eslint-disable */
 export class Canvas {
     constructor(canvas, ctx) {
         // this.canvas = canvas;
