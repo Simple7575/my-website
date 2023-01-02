@@ -16,7 +16,11 @@
     }
 
     @media screen and (max-width: 480px) {
-        padding: 0 1rem;
+        padding: 1rem 1rem 0 1rem;
+
+        canvas {
+            top: -25%;
+        }
     }
 
     h2 {

@@ -8,6 +8,7 @@ import Contacts from "./components/Contacts.js";
 import Examples from "./components/Examples.js";
 import Footer from "./components/Footer.js";
 import Form from "./components/Form.js";
+import Sphere from "./components/Threejs/Sphere.js";
 
 function App() {
     const [formState, setFormState] = useState(true);
@@ -53,6 +54,7 @@ function App() {
                 />
             </Helmet>
             <Hero setFormState={setFormState} />
+            <Sphere />
             <Skills />
             <About />
             <Examples />
