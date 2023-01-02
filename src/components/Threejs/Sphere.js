@@ -1,5 +1,10 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
+import { TTFLoader } from "three/examples/jsm/loaders/TTFLoader";
+import font from "../../fonts/Ubuntu/Ubuntu-Bold.ttf";
+// import font from "three/examples/fonts/droid/droid_sans_bold.typeface.json";
 import gsap from "gsap";
 import { useRef, useEffect } from "react";
 // import { GUI } from "dat.gui";
@@ -73,21 +78,55 @@ export default function Sphere() {
         renderer.setSize(containerWidth, containerHeight);
         renderer.domElement.className = styles.canvas;
         renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFShadowMap;
         container.appendChild(renderer.domElement);
 
         // Camera
         const camera = new THREE.PerspectiveCamera(45, containerWidth / containerHeight, 0.1, 100);
-        camera.position.z = 10;
+        camera.position.z = 7;
         camera.position.y = 5;
 
         // Light
+        const lightObj = new THREE.Object3D();
         const light = new THREE.PointLight(0xffffff, 3, 100, 7);
-        light.position.set(-5, 2, 10);
+        light.position.set(0, 2, 10);
         light.castShadow = true;
-        scene.add(light);
+        scene.add(lightObj);
+        lightObj.add(light);
+        lightObj.rotation.y = -250;
+
+        // AmbientLight
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.6); // soft white light
+        scene.add(ambientLight);
 
         // Text
-        // const text = new THREE.TextGeometry("hi");
+        const textObj = new THREE.Object3D();
+        const textLoader = new FontLoader();
+        const ttfLoeader = new TTFLoader();
+        ttfLoeader.load(font, (json) => {
+            const ubuntuFont = textLoader.parse(json);
+
+            const geometry = new TextGeometry("Three.js", {
+                font: ubuntuFont,
+                size: 0.7,
+                height: 0.2,
+                curveSegments: 2,
+            });
+            // const material = new THREE.MeshBasicMaterial({ color: 0xffd000 });
+            const frontMaterial = new THREE.MeshPhongMaterial({
+                color: 0x003cff,
+            });
+            const sideMaterial = new THREE.MeshPhongMaterial({
+                color: 0x9b7200,
+            });
+            const mesh = new THREE.Mesh(geometry, [frontMaterial, sideMaterial]);
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            mesh.position.set(1.8, 2.2, 0);
+            mesh.rotation.set(0, -0, -1.3);
+            textObj.add(mesh);
+        });
+        scene.add(textObj);
 
         // Earth
         const earth = new SphereClass(2, 64, 32, 0xffff00).create(earthTexture);
@@ -132,11 +171,19 @@ export default function Sphere() {
         let animationID;
         const animate = () => {
             animationID = requestAnimationFrame(animate);
-            // earth.rotation.x += 0.01;
+
+            // lightObj.rotation.y += 0.002;
+
             earth.rotation.y += 0.002;
+
+            textObj.rotation.x += 0.004;
+            textObj.rotation.y += 0.004;
+
             clouds.rotation.x -= 0.002;
             clouds.rotation.y += 0.001;
+
             moonObj.rotation.y += 0.004;
+
             renderer.render(scene, camera);
         };
         animate();
@@ -175,7 +222,7 @@ export default function Sphere() {
     return (
         <>
             <div ref={canvasRef} className={styles.container}>
-                <h1>Three JS</h1>
+                {/* <h1>Three JS</h1> */}
                 {/* Sphere */}
             </div>
         </>
