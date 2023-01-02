@@ -151,6 +151,7 @@ export default function Sphere() {
         window.addEventListener("resize", resizeFunc);
 
         // Gsap
+        // eslint-disable-next-line no-unused-vars
         const tl = gsap.timeline().from(moon.position, {
             y: 1,
             repeat: -1,
