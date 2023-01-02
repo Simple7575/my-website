@@ -66,6 +66,7 @@ export default function Sphere() {
 
         // Scene
         const scene = new THREE.Scene();
+        // scene.background = new THREE.Color(0xffffff);
 
         // Renderer
         const renderer = new THREE.WebGLRenderer();
@@ -85,21 +86,27 @@ export default function Sphere() {
         light.castShadow = true;
         scene.add(light);
 
+        // Text
+        // const text = new THREE.TextGeometry("hi");
+
         // Earth
         const earth = new SphereClass(2, 64, 32, 0xffff00).create(earthTexture);
         earth.rotation.z += -0.3;
         scene.add(earth);
 
-        // Atmosphere
-        // const atmosphere = new THREE.Mesh(
-        //     new THREE.SphereGeometry(2.2, 64, 32),
-        //     new THREE.ShaderMaterial({
-        //         vertexShader,
-        //         fragmentShader,
-        //     })
-        // );
-        // scene.add(atmosphere);
-        // console.log(shaders.vertexShader);
+        // Atmosphere;
+        const atmosphere = new THREE.Mesh(
+            new THREE.SphereGeometry(2, 64, 32),
+            new THREE.ShaderMaterial({
+                vertexShader,
+                fragmentShader,
+                blending: THREE.AdditiveBlending,
+                side: THREE.BackSide,
+            })
+        );
+        atmosphere.scale.set(1.1, 1.1, 1.1);
+        atmosphere.rotation.z += -0.3;
+        scene.add(atmosphere);
 
         // Clouds
         const clouds = new SphereClass(2.1, 64, 32, 0xffffff).clouds(cloudsTexture);
@@ -167,6 +174,7 @@ export default function Sphere() {
     return (
         <>
             <div ref={canvasRef} className={styles.container}>
+                <h1>Three JS</h1>
                 {/* Sphere */}
             </div>
         </>

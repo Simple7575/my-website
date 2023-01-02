@@ -54,8 +54,8 @@ function App() {
                 />
             </Helmet>
             <Hero setFormState={setFormState} />
-            <Sphere />
             <Skills />
+            <Sphere />
             <About />
             <Examples />
             <Contacts setFormState={setFormState} />

@@ -54,6 +54,29 @@ In the later case, you'll also want to export from foo.glsl
 #pragma glslify: export(foo)
 ```
 
+> # <mark>WARNING!</mark>
+
+## After <mark>npm run eject</mark> you might get an eslint error
+
+## to fix it in <mark>package.json</mark> add following code
+
+```js
+ "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "parserOptions": {
+      "babelOptions": {
+        "presets": [
+          ["babel-preset-react-app", false],
+          'babel-preset-react-app/prod'
+        ]
+      }
+    }
+  },
+```
+
 # Thank you for this guide! To do this without ejecting, we can use the following <mark>.rescriptsrc</mark> file:
 
 ```js
