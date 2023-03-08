@@ -47,7 +47,7 @@ export default function Hero({ setFormState }) {
                         <h2 className="">Simple</h2>
                     </div>
                     <h1 className={`${styles.hero__headline} ${styles[trgtClassNm]}`}>
-                        Lets create your dream project.
+                        Let's create your dream project.
                     </h1>
                     <button
                         className={`${styles.hero__button} ${styles[trgtClassNm]}`}

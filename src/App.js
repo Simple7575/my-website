@@ -9,6 +9,7 @@ import Examples from "./components/Examples.js";
 import Footer from "./components/Footer.js";
 import Form from "./components/Form.js";
 import Sphere from "./components/Threejs/Sphere.js";
+import Cards from "./components/Threejs/ThreeDCards/Cards.js";
 
 function App() {
     const [formState, setFormState] = useState(true);
@@ -55,7 +56,8 @@ function App() {
             </Helmet>
             <Hero setFormState={setFormState} />
             <Skills />
-            <Sphere />
+            {/* <Sphere /> */}
+            <Cards />
             <About />
             <Examples />
             <Contacts setFormState={setFormState} />
