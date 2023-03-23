@@ -5,17 +5,45 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { RBox } from "./rbClass.js";
 import styles from "../../../style/skills.module.scss";
 
-export default function Card({ children, logo, color }) {
+const cartGuiInit = (gui, ReactCard, renderer, containerSize) => {
+    const meshColor = {
+        color: ReactCard.material[4].color.getHex(),
+        emissive: ReactCard.material[4].emissive.getHex(),
+    };
+    const CardFolder = gui.addFolder("Card");
+    CardFolder.add(containerSize, "containerWidth", 100, 500)
+        .name("CSize x")
+        .onChange((value) => renderer.setSize(value, containerSize.containerHeight));
+    CardFolder.add(containerSize, "containerHeight", 100, 500)
+        .name("CSize y")
+        .onChange((value) => renderer.setSize(containerSize.containerWidth, value));
+    CardFolder.add(ReactCard.rotation, "x", -10, 10).name("rotate x");
+    CardFolder.add(ReactCard.rotation, "y", -10, 10).name("rotate y");
+    CardFolder.addColor(meshColor, "color")
+        .name("Color")
+        .onChange((value) => {
+            ReactCard.material[0].color.set(value);
+        });
+    CardFolder.addColor(meshColor, "emissive")
+        .name("Emissive")
+        .onChange((value) => {
+            ReactCard.material[4].emissive.set(value);
+        });
+    CardFolder.add(ReactCard.material[4], "opacity", 0, 1).name("Opacity");
+    CardFolder.add(ReactCard.material[4], "transparent").name("Transparancy");
+};
+
+export default function RoundedBox({ children, logo, color }) {
     const canvasRef = useRef();
 
     useEffect(() => {
-        const gui = new GUI();
+        // const gui = new GUI();
 
         // Container
         const container = canvasRef.current;
         const containerSize = {
-            containerWidth: 500,
-            containerHeight: 500,
+            containerWidth: 100,
+            containerHeight: 100,
         };
 
         // Scene
@@ -40,10 +68,23 @@ export default function Card({ children, logo, color }) {
         camera.position.z = 8.39;
 
         // Directional Light
-        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1);
-        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1);
-        const directionalLight3 = new THREE.DirectionalLight(0xffffff, 1);
-        const directionalLight4 = new THREE.DirectionalLight(0xffffff, 1);
+        const dLightSettings = { intensity: 5, color: 0xffffff };
+        const directionalLight1 = new THREE.DirectionalLight(
+            dLightSettings.color,
+            dLightSettings.intensity
+        );
+        const directionalLight2 = new THREE.DirectionalLight(
+            dLightSettings.color,
+            dLightSettings.intensity
+        );
+        const directionalLight3 = new THREE.DirectionalLight(
+            dLightSettings.color,
+            dLightSettings.intensity
+        );
+        const directionalLight4 = new THREE.DirectionalLight(
+            dLightSettings.color,
+            dLightSettings.intensity
+        );
         directionalLight1.position.set(-5, -5, -10);
         directionalLight2.position.set(5, 5, 10);
         directionalLight3.position.set(5, 5, -10);
@@ -53,30 +94,30 @@ export default function Card({ children, logo, color }) {
         scene.add(directionalLight3);
         scene.add(directionalLight4);
 
-        const dHelper = new THREE.DirectionalLightHelper(
-            directionalLight2,
-            1,
-            new THREE.Color(0xa259ff)
-        );
-        const dHelper2 = new THREE.DirectionalLightHelper(
-            directionalLight1,
-            1,
-            new THREE.Color(0xfffff)
-        );
-        const dHelper3 = new THREE.DirectionalLightHelper(
-            directionalLight3,
-            1,
-            new THREE.Color(0xa259ff)
-        );
-        const dHelper4 = new THREE.DirectionalLightHelper(
-            directionalLight4,
-            1,
-            new THREE.Color(0xfffff)
-        );
-        scene.add(dHelper);
-        scene.add(dHelper2);
-        scene.add(dHelper3);
-        scene.add(dHelper4);
+        // const dHelper = new THREE.DirectionalLightHelper(
+        //     directionalLight2,
+        //     1,
+        //     new THREE.Color(0xa259ff)
+        // );
+        // const dHelper2 = new THREE.DirectionalLightHelper(
+        //     directionalLight1,
+        //     1,
+        //     new THREE.Color(0xfffff)
+        // );
+        // const dHelper3 = new THREE.DirectionalLightHelper(
+        //     directionalLight3,
+        //     1,
+        //     new THREE.Color(0xa259ff)
+        // );
+        // const dHelper4 = new THREE.DirectionalLightHelper(
+        //     directionalLight4,
+        //     1,
+        //     new THREE.Color(0xfffff)
+        // );
+        // scene.add(dHelper);
+        // scene.add(dHelper2);
+        // scene.add(dHelper3);
+        // scene.add(dHelper4);
 
         // AmbientLight
         const ambientLight = new THREE.AmbientLight(0xffffff, 1); // soft white light
@@ -90,33 +131,20 @@ export default function Card({ children, logo, color }) {
         const ReactCard = new RBox(size, size, size, 10, 0.5, renderer).init(color, logo);
         scene.add(ReactCard);
         camera.lookAt(ReactCard);
-        console.log(ReactCard.material[4].opacity);
 
         // Card-Gui
-        const meshColor = {
-            color: ReactCard.material[0].color.getHex(),
-        };
-        const CardFolder = gui.addFolder("Card");
-        CardFolder.add(containerSize, "containerWidth", 100, 500)
-            .name("CSize x")
-            .onChange((value) => renderer.setSize(value, containerSize.containerHeight));
-        CardFolder.add(containerSize, "containerHeight", 100, 500)
-            .name("CSize y")
-            .onChange((value) => renderer.setSize(containerSize.containerWidth, value));
-        CardFolder.add(ReactCard.rotation, "x", -10, 10).name("rotate x");
-        CardFolder.add(ReactCard.rotation, "y", -10, 10).name("rotate y");
-        CardFolder.addColor(meshColor, "color")
-            .name("Color")
-            .onChange((value) => {
-                ReactCard.material[0].color.set(value);
-            });
-        CardFolder.add(ReactCard.material[4], "opacity", 0, 1).name("Opacity");
+        // cartGuiInit(gui, ReactCard, renderer, containerSize);
 
-        // // Light-Gui
+        // Light-Gui
+        // const lights = [directionalLight1, directionalLight2, directionalLight3, directionalLight4];
         // const LightFolder = gui.addFolder("Light");
-        // LightFolder.add(directionalLight.position, "x", -10, 10).name("Light X");
-        // LightFolder.add(directionalLight.position, "y", -10, 10).name("Light Y");
-        // LightFolder.add(directionalLight.position, "z", -10, 10).name("Light Z");
+        // LightFolder.add(dLightSettings, "intensity", 0, 10)
+        //     .name("Intensity")
+        //     .onChange((value) => {
+        //         lights.forEach((light) => {
+        //             light.intensity = value;
+        //         });
+        //     });
 
         // Camera-Gui
         // const CameraFolder = gui.addFolder("Camera");
@@ -126,9 +154,12 @@ export default function Card({ children, logo, color }) {
         // CameraFolder.add(camera.rotation, "x", -10, 10, 0.001).name("Camera R X");
         // CameraFolder.add(camera.rotation, "y", -10, 10, 0.001).name("Camera R Y");
 
+        console.log();
         // Animation
         let animationID;
         let angle = 0.004;
+        const rotationX = Math.floor(Math.random() * 9 + 1) * 0.001;
+        const rotationY = Math.floor(Math.random() * 9 + 1) * 0.001;
         const animate = () => {
             renderer.render(scene, camera);
 
@@ -139,8 +170,8 @@ export default function Card({ children, logo, color }) {
             // }
             // ReactCard.rotation.x += angle;
 
-            // ReactCard.rotation.x += 0.004;
-            // ReactCard.rotation.y += 0.004;
+            ReactCard.rotation.x += rotationX;
+            ReactCard.rotation.y += rotationY;
 
             animationID = requestAnimationFrame(animate);
         };
@@ -156,7 +187,7 @@ export default function Card({ children, logo, color }) {
 
         return () => {
             container.removeChild(renderer.domElement);
-            gui.destroy();
+            // gui.destroy();
 
             // window.removeEventListener(window, resizeFunc);
             cancelAnimationFrame(animationID);

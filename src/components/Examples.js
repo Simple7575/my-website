@@ -38,7 +38,7 @@ export default function Examples() {
                 <div className={styles.frame_links}>
                     <a
                         // href="https://www.eco-gw.ru"
-                        href="https://clever-ptolemy-12408e.netlify.app/</div>"
+                        href="https://clever-ptolemy-12408e.netlify.app/"
                         target="test_frame"
                         rel="noreferrer noopener nofollow"
                         onClick={handleClick}

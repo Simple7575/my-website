@@ -1,8 +1,35 @@
 import styles from "../style/skills.module.scss";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import Skill from "./Skill/Skill.js";
+import RoundedBox from "./Threejs/ThreeDCards/RoundedBox";
+
+import ReactLogo from "../style/svg/react_logo.svg";
+import HtmlLogo from "../style/svg/html_logo.svg";
+import CssLogo from "../style/svg/css_logo.svg";
+import NodeLogo from "../style/svg/nodejs_logo.svg";
+import JSLogo from "../style/svg/js_logo.svg";
+import WPLogo from "../style/svg/wordpress_logo.svg";
+import FGLogo from "../style/svg/figma_logo.svg";
+import SassLogo from "../style/svg/sass_logo.svg";
+import PythonLogo from "../style/svg/python_logo.svg";
+import NextLogo from "../style/svg/nextjs_logo.svg";
+
+const skillsList = [
+    { title: "Html", color: 0xffac0f, logo: HtmlLogo },
+    { title: "React", color: 0x278ae5, logo: ReactLogo },
+    { title: "CSS", color: 0x130fff, logo: CssLogo },
+    { title: "Node.js", color: 0x539e43, logo: NodeLogo },
+    { title: "JavaScript", color: 0xead41c, logo: JSLogo },
+    { title: "WordPress", color: 0x1c85b4, logo: WPLogo },
+    { title: "Figma", color: 0xa259ff, logo: FGLogo },
+    { title: "Sass", color: 0xcd6799, logo: SassLogo },
+    { title: "Python", color: 0x387eb8, logo: PythonLogo },
+    { title: "Next.js", color: 0x00d8ff, logo: NextLogo },
+];
 
 export default function Skills() {
     const targetRef = useRef();
+    const [is3D, setIs3D] = useState(false);
 
     const obsClback = (entries, observer) => {
         for (let entry of entries) {
@@ -41,8 +68,43 @@ export default function Skills() {
             <div className={styles.skills__headline}>
                 <h2>Skills & Knowledge</h2>
             </div>
+            <div className={styles.checkbox__wrapper}>
+                <label htmlFor="3Dcheckbox" className={styles.checkbox__label}>
+                    3D
+                    <div
+                        className={`${styles.checkbox__replacement} ${is3D ? styles.checked : ""}`}
+                    >
+                        {is3D ? <>&#10004;</> : null}
+                    </div>
+                    <input
+                        type="checkbox"
+                        name="3Dcheckbox"
+                        id="3Dcheckbox"
+                        checked={is3D}
+                        onChange={(e) => {
+                            setIs3D(!is3D);
+                        }}
+                    />
+                </label>
+                <span>Caution 3D may couse bad performance!</span>
+            </div>
             <div className={styles.skills__icons__wrapper} ref={targetRef}>
-                <div className={`${styles.skills__icons} `}>
+                {is3D
+                    ? skillsList.map((sk) => {
+                          return (
+                              <RoundedBox logo={sk.logo} color={sk.color} key={sk.title}>
+                                  {sk.title}
+                              </RoundedBox>
+                          );
+                      })
+                    : skillsList.map((sk) => {
+                          return (
+                              <Skill logo={sk.logo} color={sk.color} key={sk.title}>
+                                  {sk.title}
+                              </Skill>
+                          );
+                      })}
+                {/* <div className={`${styles.skills__icons} `}>
                     <svg
                         width="74"
                         height="98"
@@ -353,7 +415,7 @@ export default function Skills() {
                         </defs>
                     </svg>
                     <span>Next.js</span>
-                </div>
+                </div> */}
             </div>
         </div>
     );
