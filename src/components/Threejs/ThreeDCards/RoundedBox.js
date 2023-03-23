@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { GUI } from "dat.gui";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -5,6 +6,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { RBox } from "./rbClass.js";
 import styles from "../../../style/skills.module.scss";
 
+// eslint-disable-next-line
 const cartGuiInit = (gui, ReactCard, renderer, containerSize) => {
     const meshColor = {
         color: ReactCard.material[4].color.getHex(),
@@ -157,6 +159,7 @@ export default function RoundedBox({ children, logo, color }) {
         console.log();
         // Animation
         let animationID;
+        // eslint-disable-next-line
         let angle = 0.004;
         const rotationX = Math.floor(Math.random() * 9 + 1) * 0.001;
         const rotationY = Math.floor(Math.random() * 9 + 1) * 0.001;
@@ -192,6 +195,7 @@ export default function RoundedBox({ children, logo, color }) {
             // window.removeEventListener(window, resizeFunc);
             cancelAnimationFrame(animationID);
         };
+        // eslint-disable-next-line
     }, []);
 
     return (
