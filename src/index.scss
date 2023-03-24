@@ -2,6 +2,20 @@
 
 @import "/src/style/vars.scss";
 
+@font-face {
+    font-family: "ubuntu";
+    src: url("./fonts/Ubuntu/Ubuntu-Regular.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "comforter";
+    src: url("./fonts/Comforter/Comforter-Regular.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
