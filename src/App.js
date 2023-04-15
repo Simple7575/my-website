@@ -1,14 +1,14 @@
 import { useState } from "react";
-
 import { Helmet } from "react-helmet";
 import Hero from "./components/Hero.js";
 import Skills from "./components/Skills.js";
 import About from "./components/About.js";
 import Contacts from "./components/Contacts.js";
-import Examples from "./components/Examples.js";
+// import Examples from "./components/Examples.js";
 import Footer from "./components/Footer.js";
 import Form from "./components/Form.js";
 import Sphere from "./components/Threejs/Sphere.js";
+import Examples3D from "./components/Examples3D.js";
 // eslint-disable-next-line
 import RoundedBoxes from "./components/Threejs/ThreeDCards/RoundedBoxes";
 
@@ -60,7 +60,8 @@ function App() {
             <Sphere />
             {/* <RoundedBoxes /> */}
             <About />
-            <Examples />
+            {/* <Examples /> */}
+            <Examples3D />
             <Contacts setFormState={setFormState} />
             <Footer />
             <Form formState={formState} setFormState={setFormState} />
